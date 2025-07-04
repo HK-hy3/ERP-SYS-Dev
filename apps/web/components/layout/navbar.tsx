@@ -1,22 +1,21 @@
 "use client"
 
-import { Bell, HelpCircle, Search } from "lucide-react"
+import { Search } from "lucide-react"
 import type { ReactNode } from "react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar"
-import { Button } from "@workspace/ui/components/button"
 import { Input } from "@workspace/ui/components/input"
 import { SidebarTrigger } from "@workspace/ui/components/sidebar"
 import { ThemeToggle } from "@workspace/ui/components/theme-toggle"
-import { usePathname } from "next/navigation"
+// import { usePathname } from "next/navigation"
 
 
 export interface NavbarProps {
-  appTitle?: string
+  // appTitle?: string
   showSearch?: boolean
   showThemeToggle?: boolean
-  showNotifications?: boolean
-  showHelp?: boolean
+  // showNotifications?: boolean
+  // showHelp?: boolean
   userAvatar?: string
   userInitials?: string
   leftContent?: ReactNode
@@ -25,19 +24,19 @@ export interface NavbarProps {
 }
 
 export function Navbar({
-  appTitle,
+  // appTitle,
   showSearch = true,
   showThemeToggle = true,
-  showNotifications = true,
-  showHelp = true,
+  // showNotifications = true,
+  // showHelp = true,
   userAvatar = "/placeholder.svg",
   userInitials = "JD",
   leftContent,
   rightContent,
   onSearch,
 }: NavbarProps) {
-  const pathname = usePathname()
-  const hideNotifications = pathname.startsWith("/qoc")
+  // const pathname = usePathname()
+  // const hideNotifications = pathname.startsWith("/qoc")
 
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-background px-4 lg:h-[60px]">

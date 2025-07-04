@@ -12,7 +12,7 @@ import { useFetchAssignedKpis } from "@/hooks/dept"
 import { Badge } from "@workspace/ui/components/badge"
 
 export default function AssignPage() {
-  const { data: departments, isLoading } = useFetchDepartments()
+  const { data: departments} = useFetchDepartments()
   const { data: forms } = useFetchForms()
   const assignKpiMutation = useAssignKpiToPillar()
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null)

@@ -150,7 +150,7 @@ export async function PUT(
     }
     
     // Update data preparation
-    const updateData: any = {};
+    const updateData: Record<string, unknown> = {};
     
     if (body.pillar_id) updateData.pillar_id = Number(body.pillar_id);
     if (kpi_status !== undefined) updateData.kpi_status = kpi_status;

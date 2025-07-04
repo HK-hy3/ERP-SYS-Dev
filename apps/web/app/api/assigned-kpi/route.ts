@@ -11,7 +11,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     const pillarId = url.searchParams.get('pillar_id');
     
     // Build query conditions
-    let where: any = {};
+    const where: Record<string, unknown> = {};
     
     // If pillar_id is provided, filter by it
     if (pillarId) {

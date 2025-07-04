@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar"
-import { BarChart3, BookOpen, CalendarIcon, FileText, LineChart, PieChart, Users, UserPlus } from "lucide-react"
+// import { useState } from "react";
+// import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar"
+import { BarChart3, BookOpen, CalendarIcon, FileText, LineChart, PieChart, Users} from "lucide-react"
+// import { UserPlus } from "lucide-react"
 import { Button } from "@workspace/ui/components/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@workspace/ui/components/card"
 import { Progress } from "@workspace/ui/components/progress"
@@ -10,7 +11,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Badge } from "@workspace/ui/components/badge"
 
 export function DashboardContent() {
-    const [openAssignDialog, setOpenAssignDialog] = useState(false)
+    // const [openAssignDialog, setOpenAssignDialog] = useState(false)
   return (
     <div className="mx-auto max-w-7xl">
       <div className="flex items-center justify-between mb-6">

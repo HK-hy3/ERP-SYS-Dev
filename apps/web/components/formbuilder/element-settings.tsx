@@ -11,14 +11,14 @@ import { useState } from "react"
 
 interface ElementSettingsProps {
   element: FormElementInstance
-  updateElement: (id: string, attributes: Record<string, any>) => void
+  updateElement: (id: string, attributes: Record<string, string | number | boolean | { label: string; value: string }[]>) => void
   onClose: () => void
 }
 
 export default function ElementSettings({ element, updateElement, onClose }: ElementSettingsProps) {
   const { attributes } = element
 
-  const handleChange = (key: string, value: any) => {
+  const handleChange = (key: string, value: string | number | boolean) => {
     updateElement(element.id, { [key]: value })
   }
 
@@ -164,12 +164,12 @@ export default function ElementSettings({ element, updateElement, onClose }: Ele
 
 interface OptionsEditorProps {
   element: FormElementInstance
-  updateElement: (id: string, attributes: Record<string, any>) => void
+  updateElement: (id: string, attributes: Record<string, string | number | boolean | { label: string; value: string }[]>) => void
 }
 
 function OptionsEditor({ element, updateElement }: OptionsEditorProps) {
-  const options = element.attributes.options || []
-  const [newOption, setNewOption] = useState({ label: "", value: "" })
+  const options = (element.attributes.options || []).map((opt: any) => ({ label: String(opt.label ?? ''), value: String(opt.value ?? '') })) as { label: string; value: string }[]
+  const [newOption, setNewOption] = useState<{ label: string; value: string }>({ label: "", value: "" })
 
   const addOption = () => {
     if (!newOption.label.trim() || !newOption.value.trim()) return
@@ -180,13 +180,17 @@ function OptionsEditor({ element, updateElement }: OptionsEditorProps) {
   }
 
   const removeOption = (index: number) => {
-    const updatedOptions = options.filter((_, i) => i !== index)
+    const updatedOptions = options.filter((_: { label: string; value: string }, i: number) => i !== index)
     updateElement(element.id, { options: updatedOptions })
   }
 
   const updateOption = (index: number, field: "label" | "value", value: string) => {
     const updatedOptions = [...options]
-    updatedOptions[index] = { ...updatedOptions[index], [field]: value }
+    updatedOptions[index] = {
+      label: String(updatedOptions[index]?.label ?? ''),
+      value: String(updatedOptions[index]?.value ?? ''),
+      [field]: value
+    }
     updateElement(element.id, { options: updatedOptions })
   }
 
@@ -195,7 +199,7 @@ function OptionsEditor({ element, updateElement }: OptionsEditorProps) {
       <Label>Options</Label>
 
       <div className="space-y-2">
-        {options.map((option, index) => (
+        {options.map((option: { label: string; value: string }, index: number) => (
           <div key={index} className="flex items-center gap-2">
             <Input
               placeholder="Label"

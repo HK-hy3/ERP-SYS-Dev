@@ -168,7 +168,7 @@ interface OptionsEditorProps {
 }
 
 function OptionsEditor({ element, updateElement }: OptionsEditorProps) {
-  const options = (element.attributes.options || []).map((opt: any) => ({ label: String(opt.label ?? ''), value: String(opt.value ?? '') })) as { label: string; value: string }[]
+  const options = (element.attributes.options || []).map((opt: { label?: string; value?: string }) => ({ label: String(opt.label ?? ''), value: String(opt.value ?? '') })) as { label: string; value: string }[]
   const [newOption, setNewOption] = useState<{ label: string; value: string }>({ label: "", value: "" })
 
   const addOption = () => {

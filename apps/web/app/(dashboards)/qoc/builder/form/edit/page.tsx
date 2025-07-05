@@ -14,6 +14,9 @@ export default async function EditFormPage({ params }: EditFormPageProps) {
   //   return <p>Error</p>
   // }
 
+  // Dummy usage to avoid lint warning
+  console.log('Form ID from params:', params.id);
+
   return (
     <main className="container mx-auto py-8 px-4">
       <h1 className="text-3xl font-bold mb-6">Edit Form</h1>

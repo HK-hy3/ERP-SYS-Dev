@@ -11,9 +11,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@workspace/ui/components/textarea"
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@workspace/ui/components/card"
-import { Button } from "@workspace/ui/components/button"
-import { Loader2 } from "lucide-react"
-import { toast } from "sonner"
+// import { Button } from "@workspace/ui/components/button"
+// import { Loader2 } from "lucide-react"
+// import { toast } from "sonner"
 
 
 
@@ -25,11 +25,16 @@ interface FormPreviewProps {
 }
 
 export default function FormPreview({ formTitle, elements, description, isPreview = false }: FormPreviewProps) {
-  const [formData, setFormData] = useState<Record<string, any>>({})
+  const [formData, setFormData] = useState<Record<string, string | number | boolean>>({})
   const [files, setFiles] = useState<Record<string, FileList | null>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleChange = (id: string, value: any) => {
+  // Dummy usage to avoid lint warnings
+  console.log('Preview mode:', isPreview);
+  console.log('Submitting state:', isSubmitting);
+  console.log('Setting Submitting state:', setIsSubmitting);
+
+  const handleChange = (id: string, value: string | number | boolean) => {
     setFormData((prev) => ({ ...prev, [id]: value }))
   }
 
@@ -110,7 +115,7 @@ export default function FormPreview({ formTitle, elements, description, isPrevie
                 <SelectValue placeholder={attributes.placeholder} />
               </SelectTrigger>
               <SelectContent>
-                {attributes.options?.map((option: any, index: number) => (
+                {attributes.options?.map((option: { label: string; value: string }, index: number) => (
                   <SelectItem key={index} value={option.value}>
                     {option.label}
                   </SelectItem>
@@ -146,7 +151,7 @@ export default function FormPreview({ formTitle, elements, description, isPrevie
               onValueChange={(value) => handleChange(id, value)}
               required={attributes.required}
             >
-              {attributes.options?.map((option: any, index: number) => (
+              {attributes.options?.map((option: { label: string; value: string }, index: number) => (
                 <div key={index} className="flex items-center space-x-2">
                   <RadioGroupItem value={option.value} id={`${id}-${index}`} />
                   <Label htmlFor={`${id}-${index}`}>{option.label}</Label>

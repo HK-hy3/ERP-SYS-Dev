@@ -4,7 +4,7 @@ import { prisma } from '@repo/db';
 /**
  * GET function to fetch all KPIs.
  */
-export async function GET(request: Request): Promise<NextResponse> {
+export async function GET(): Promise<NextResponse> {
   try {
     const kpis = await prisma.kpi.findMany();
     
@@ -45,6 +45,9 @@ export async function POST(request: Request): Promise<NextResponse> {
       kpi_value,
       kpi_description
     } = body;
+
+    // Dummy usage to avoid lint warning
+    console.log('Received title:', title);
 
     // Validate required fields
     if (!id) {

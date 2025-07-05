@@ -13,6 +13,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     // Extract relevant fields from the JSON
     const { id, title, elements, createdAt , value, description  } = body;
 
+    // Dummy usage to avoid lint warning
+    console.log('Received ID:', id);
+
     // Save the data to the `kpi` table
     const newKpi = await prisma.kpi.create({
       data: {

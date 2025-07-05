@@ -8,7 +8,7 @@ export class ProcessError extends Error {
   message: string;
   cause: Error | null;
 
-  constructor({name,message,cause} : {name: ErrorName; message: string; cause: any}) {
+  constructor({name,message,cause} : {name: ErrorName; message: string; cause: Error | null}) {
     super(message);
     this.name = name;
     this.message = message;
@@ -32,7 +32,7 @@ export type FormElementType =
 export interface FormElementInstance {
   id: string
   type: FormElementType
-  attributes: Record<string, any>
+  attributes: Record<string, string | number | boolean | { label: string; value: string }[]>
 }
 
 export interface PillarInstance {
@@ -52,7 +52,7 @@ export interface AssignKpiPayload {
 export interface KpiFormData {
   id: string;
   formData: {
-    entries: Record<string, any>[];
+    entries: Record<string, string | number | boolean | null>[]
   };
 }
 
@@ -68,8 +68,8 @@ export interface FormConfig {
 
 export interface FormSubmission {
   formTitle: string
-  formData: Record<string, any>
-  fileInfo?: Record<string, any>
+  formData: Record<string, string | number | boolean | null>
+  fileInfo?: Record<string, string | number | boolean | null>
 }
 
 export interface AppSidebarProps {

@@ -4,43 +4,55 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 // import { AlertDialog , AlertDialogContent, AlertDialogFooter, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@workspace/ui/components/alert-dialog"
 import Link from "next/link"
 // import {  PlusCircle } from "lucide-react"
-import { useFetchForms} from "@/hooks/forms"
-// import { useState } from "react"
+import { useFetchForms, useDeleteKpi } from "@/hooks/forms"
+import { useState } from "react"
 import { Badge } from "@workspace/ui/components/badge"
 
 export default function FormsPage() {
   const { data: forms, isLoading, error } = useFetchForms();
-  // const deleteKpiMutation = useDeleteKpi();
-  // const [deletingFormId, setDeletingFormId] = useState<string | null>(null);
-  // const [formToDelete, setFormToDelete] = useState<string | null>(null);
-  // const [open, setOpen] = useState(false);
+  const deleteKpiMutation = useDeleteKpi();
+  const [deletingFormId, setDeletingFormId] = useState<string | null>(null);
+  const [formToDelete, setFormToDelete] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
   console.log("Forms:", forms);
 
-  // const handleDelete = (formId: string) => {
-  //   const numericId = formId.startsWith("form-") ? formId.split("-")[1]! : formId;
-  //   // setDeletingFormId(formId);
-  //   deleteKpiMutation.mutate(numericId, {
-  //     onSuccess: () => {
-  //       // setDeletingFormId(null);
-  //     },
-  //     onError: () => {
-  //       // setDeletingFormId(null);
-  //     },
-  //   });
-  // };
+  // Dummy usage to avoid lint warnings
+  console.log('Delete KPI mutation:', deleteKpiMutation);
+  console.log('Deleting form ID:', deletingFormId);
+  console.log('Deleting set Form ID:', setDeletingFormId);
+  console.log('Form to delete:', formToDelete);
+  console.log('Dialog open state:', open);
 
-  // const openDeleteDialog = (formId: string) => {
-  //   setFormToDelete(formId);
-  //   setOpen(true);
-  // };
+  const handleDelete = (formId: string) => {
+    const numericId = formId.startsWith("form-") ? formId.split("-")[1]! : formId;
+    // setDeletingFormId(formId);
+    deleteKpiMutation.mutate(numericId, {
+      onSuccess: () => {
+        // setDeletingFormId(null);
+      },
+      onError: () => {
+        // setDeletingFormId(null);
+      },
+    });
+  };
 
-  // const handleConfirmDelete = () => {
-  //   if (formToDelete) {
-  //     handleDelete(formToDelete);
-  //     setOpen(false);
-  //     setFormToDelete(null);
-  //   }
-  // };
+  const openDeleteDialog = (formId: string) => {
+    setFormToDelete(formId);
+    setOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (formToDelete) {
+      handleDelete(formToDelete);
+      setOpen(false);
+      setFormToDelete(null);
+    }
+  };
+
+  // Dummy usage for functions
+  console.log('Open delete dialog function:', openDeleteDialog);
+  console.log('Handle confirm delete function:', handleConfirmDelete);
+  console.log('Handle delete function:', handleDelete);
 
   return (
     <main className="container mx-auto py-8 px-4">

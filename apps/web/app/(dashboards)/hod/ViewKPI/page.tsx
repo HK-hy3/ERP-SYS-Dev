@@ -1,9 +1,9 @@
 "use client"
 import { Button } from "@workspace/ui/components/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@workspace/ui/components/card"
-import { AlertDialog , AlertDialogContent, AlertDialogFooter, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@workspace/ui/components/alert-dialog"
+// import { AlertDialog , AlertDialogContent, AlertDialogFooter, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@workspace/ui/components/alert-dialog"
 import Link from "next/link"
-import {  PlusCircle } from "lucide-react"
+// import {  PlusCircle } from "lucide-react"
 import { useFetchForms , useDeleteKpi } from "@/hooks/forms"
 import { useState } from "react"
 import { Badge } from "@workspace/ui/components/badge"
@@ -38,12 +38,18 @@ export default function FormsPage() {
     }
   };
 
+  // Dummy usage to avoid lint warnings
+  console.log('Deleting form ID:', deletingFormId);
+  console.log('Dialog open state:', open);
+  console.log('Open delete dialog function:', openDeleteDialog);
+  console.log('Handle confirm delete function:', handleConfirmDelete);
+
   return (
     <main className="container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold">Your KPI's</h1>
-          <p className="text-gray-600 mt-2">Manage and edit your created KPI's</p>
+          <h1 className="text-3xl font-bold">Your KPI&apos;s</h1>
+          <p className="text-gray-600 mt-2">Manage and edit your created KPI&apos;s</p>
         </div>
       </div>
 

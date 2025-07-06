@@ -1,12 +1,19 @@
-"use client"
-import { Button } from "@workspace/ui/components/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@workspace/ui/components/card"
+"use client";
+import { Button } from "@workspace/ui/components/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card";
 // import { AlertDialog , AlertDialogContent, AlertDialogFooter, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "@workspace/ui/components/alert-dialog"
-import Link from "next/link"
+import Link from "next/link";
 // import {  PlusCircle } from "lucide-react"
-import { useFetchForms, useDeleteKpi } from "@/hooks/forms"
-import { useState } from "react"
-import { Badge } from "@workspace/ui/components/badge"
+import { useFetchForms, useDeleteKpi } from "@/hooks/forms";
+import { useState } from "react";
+import { Badge } from "@workspace/ui/components/badge";
 
 export default function FormsPage() {
   const { data: forms, isLoading, error } = useFetchForms();
@@ -17,13 +24,15 @@ export default function FormsPage() {
   console.log("Forms:", forms);
 
   // Dummy usage to avoid lint warnings
-  console.log('Delete KPI mutation:', deleteKpiMutation);
-  console.log('Deleting form ID:', deletingFormId);
-  console.log('Form to delete:', formToDelete);
-  console.log('Dialog open state:', open);
+  console.log("Delete KPI mutation:", deleteKpiMutation);
+  console.log("Deleting form ID:", deletingFormId);
+  console.log("Form to delete:", formToDelete);
+  console.log("Dialog open state:", open);
 
   const handleDelete = (formId: string) => {
-    const numericId = formId.startsWith("form-") ? formId.split("-")[1]! : formId;
+    const numericId = formId.startsWith("form-")
+      ? formId.split("-")[1]!
+      : formId;
     setDeletingFormId(formId);
     deleteKpiMutation.mutate(numericId, {
       onSuccess: () => setDeletingFormId(null),
@@ -45,58 +54,65 @@ export default function FormsPage() {
   };
 
   // Dummy usage for functions
-  console.log('Open delete dialog function:', openDeleteDialog);
-  console.log('Handle confirm delete function:', handleConfirmDelete);
-  console.log('Handle delete function:', handleDelete);
+  console.log("Open delete dialog function:", openDeleteDialog);
+  console.log("Handle confirm delete function:", handleConfirmDelete);
+  console.log("Handle delete function:", handleDelete);
 
   return (
     <main className="container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold">Your KPI&apos;s</h1>
-          <p className="text-gray-600 mt-2">Manage and edit your created KPI&apos;s</p>
+          <p className="text-gray-600 mt-2">
+            Manage and edit your created KPI&apos;s
+          </p>
         </div>
       </div>
 
       {isLoading && (
-        <p className="text-center text-black dark:text-white">Loading forms...</p>
+        <p className="text-center text-black dark:text-white">
+          Loading forms...
+        </p>
       )}
       {error && (
-        <p className="text-center text-red-600">Error loading forms: {error.message}</p>
+        <p className="text-center text-red-600">
+          Error loading forms: {error.message}
+        </p>
       )}
 
       {!isLoading && !error && (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {forms!.map((form) => (
             <Card key={form.id}>
-            <CardHeader className="flex justify-between items-center">
-              <div>
-                <CardTitle>{form.title}</CardTitle>
-                <CardDescription>
-                  Created on {new Date(form.createdAt).toLocaleDateString()}
-                </CardDescription>
-              </div>
-              <Badge>{form.value}</Badge>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm">{form.elements.length} Fields</p>
-              <p 
-                className="text-sm text-gray-500 truncate" 
-                title={form.description}
-              >
-                {form.description}
-              </p>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <Link href={`/faculty/kpi-management/${form.id.replace('form-','')}`}> 
-                <Button>View</Button>
-              </Link>
-            </CardFooter>
-          </Card>
+              <CardHeader className="flex justify-between items-center">
+                <div>
+                  <CardTitle>{form.title}</CardTitle>
+                  <CardDescription>
+                    Created on {new Date(form.createdAt).toLocaleDateString()}
+                  </CardDescription>
+                </div>
+                <Badge>{form.value}</Badge>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm">{form.elements.length} Fields</p>
+                <p
+                  className="text-sm text-gray-500 truncate"
+                  title={form.description}
+                >
+                  {form.description}
+                </p>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <Link
+                  href={`/faculty/kpi-management/${form.id.replace("form-", "")}`}
+                >
+                  <Button>View</Button>
+                </Link>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       )}
-
     </main>
   );
 }

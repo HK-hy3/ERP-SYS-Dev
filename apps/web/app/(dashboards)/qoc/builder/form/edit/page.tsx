@@ -3,8 +3,8 @@
 
 interface EditFormPageProps {
   params: {
-    id: string
-  }
+    id: string;
+  };
 }
 
 export default async function EditFormPage({ params }: EditFormPageProps) {
@@ -15,14 +15,15 @@ export default async function EditFormPage({ params }: EditFormPageProps) {
   // }
 
   // Dummy usage to avoid lint warning
-  console.log('Form ID from params:', params.id);
+  console.log("Form ID from params:", params.id);
 
   return (
     <main className="container mx-auto py-8 px-4">
       <h1 className="text-3xl font-bold mb-6">Edit Form</h1>
-      <p className="bg-secondary mb-8">Make changes to your form and save when you&apos;re done.</p>
+      <p className="bg-secondary mb-8">
+        Make changes to your form and save when you&apos;re done.
+      </p>
       {/* <FormBuilder initialForm={form} /> */}
     </main>
-  )
+  );
 }
-
